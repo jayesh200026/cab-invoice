@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import com.invoice.CabInvoiceGenerator;
+import com.invoice.Invoice;
 import com.invoice.Ride;
 
 public class CabInvoiceTest {
@@ -30,4 +31,37 @@ public class CabInvoiceTest {
 		Assert.assertEquals(expectedTotalFare, cabInvoiceGenerator.generateTotalFare(rides), epsilon);
 
 	}
+
+	@Test
+	public void givenMultipleRide_matchingWithTotalNumberOfRide_returnsTrue() {
+		CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
+		Ride[] rides = { new Ride(5, 10), new Ride(10, 25) };
+		Invoice invoice = cabInvoiceGenerator.getEnhancedInvoice(rides);
+		int expectedTotalRides = 2;
+		Assert.assertEquals(expectedTotalRides, invoice.getTotalRides());
+
+	}
+
+	@Test
+	public void givenMultipleRide_matchingWithTotalFare_returnsTrue() {
+		CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
+		Ride[] rides = { new Ride(5, 10), new Ride(10, 25) };
+		Invoice invoice = cabInvoiceGenerator.getEnhancedInvoice(rides);
+		double expectedTotalFare = 185;
+		double epsilon = 1e-15;
+		Assert.assertEquals(expectedTotalFare, invoice.getTotalFare(), epsilon);
+
+	}
+
+	@Test
+	public void givenMultipleRide_matchingWithAverageFare_returnsTrue() {
+		CabInvoiceGenerator cabInvoiceGenerator = new CabInvoiceGenerator();
+		Ride[] rides = { new Ride(5, 10), new Ride(10, 25) };
+		Invoice invoice = cabInvoiceGenerator.getEnhancedInvoice(rides);
+		double expectedTotalFare = 92.5;
+		double epsilon = 1e-15;
+		Assert.assertEquals(expectedTotalFare, invoice.getAvgfare(), epsilon);
+
+	}
+
 }
