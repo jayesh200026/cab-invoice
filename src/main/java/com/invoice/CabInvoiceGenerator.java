@@ -1,5 +1,7 @@
 package com.invoice;
 
+import java.util.List;
+
 /**
  * @author jayeshkumar Program will compute the fare and generate the invoice
  */
@@ -21,7 +23,7 @@ public class CabInvoiceGenerator {
 	 * @param rides=list of rides with distance and time
 	 * @return the total fare of the multiple rides.
 	 */
-	public double generateTotalFare(Ride[] rides) {
+	public double generateTotalFare(List<Ride> rides) {
 		double totalFare = 0;
 		for (Ride ride : rides) {
 			totalFare += generateFare(ride.getDistance(), ride.getTime());
@@ -33,9 +35,9 @@ public class CabInvoiceGenerator {
 	 * @param rides=list of rides with distance and time
 	 * @return the invoice generated for multiple rides.
 	 */
-	public Invoice getEnhancedInvoice(Ride[] rides) {
+	public Invoice getEnhancedInvoice(List<Ride> rides) {
 		double totalFare = generateTotalFare(rides);
-		Invoice invoice = new Invoice(rides.length, totalFare);
+		Invoice invoice = new Invoice(rides.size(), totalFare);
 
 		return invoice;
 
